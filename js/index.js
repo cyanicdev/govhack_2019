@@ -1,6 +1,7 @@
 function search() {
+    document.getElementById('results').innerText = 'loading ...';
     let city = $("#location").val();
-    getCoordinatesFromLocation(city, 2);
+    getCoordinatesFromLocation(city);
 }
 
 $(document).keypress(function(e) {
@@ -8,5 +9,13 @@ $(document).keypress(function(e) {
 });
 
 function getCurrentLocation() {
-    
+    document.getElementById('results').innerText = 'loading ...';
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendPosition);
+    } else {
+        alert('geolocation has failed');
+    }
+    function sendPosition(position) {
+        getCoordinatesFromLocation([position.coords.latitude, position.coords.longitude]);
+    }
 }
