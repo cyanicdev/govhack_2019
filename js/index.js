@@ -9,12 +9,7 @@ function search() {
         window.location.href = 'https://www.youtube.com/watch?v=hxyhulJYz5I';
     }
     let radius = $("#radius").val();
-    if(radius) {
-        getCoordinatesFromLocation(location, radius);
-    }
-    else {
-        getCoordinatesFromLocation(location);
-    }
+    getCoordinatesFromLocation(location, radius);
 }
 
 function checkDist() {
@@ -49,7 +44,8 @@ function getCurrentLocation() {
         alert('geolocation has failed');
     }
     function sendPosition(position) {
-        getCoordinatesFromLocation([position.coords.latitude, position.coords.longitude]);
+        let radius = $("#radius").val();
+        getCoordinatesFromLocation([position.coords.latitude, position.coords.longitude], radius);
     }
 }
 

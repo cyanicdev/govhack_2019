@@ -21,7 +21,7 @@ let opts = {
     highDpiSupport: true,     // High resolution support 
 };
 
-function getCoordinatesFromLocation(location, radius = 5) {
+function getCoordinatesFromLocation(location, radius) {
     if(typeof location == 'string')
     {
         let coordinate_url_template = `https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${OPENCAGE_API_KEY}`;
@@ -62,14 +62,20 @@ function getCoordinatesFromLocation(location, radius = 5) {
 
 function getIncidents(coordinates, radius) {
     radius *= 111;
-    let traffic_url_template = `https://dev.virtualearth.net/REST/v1/Traffic/Incidents/${coordinates[0]},${coordinates[1]},${coordinates[2]},${coordinates[3]}?key=${BING_API_KEY}`;
+    let traffic_url_template = `https://dev.virtualearth.net/REST/v1/Traffic/Incidents/${coordinates}?key=${BING_API_KEY}`;
 
     let request = new XMLHttpRequest();
 
     request.onreadystatechange = function(error) {
         if (request.readyState == 4 && request.status == 200) {
-			let response = JSON.parse(request.responseText).resourceSets[0].resources;
-            console.log(response);
+            let response = JSON.parse(request.responseText).resourceSets[0].resources;
+            if(response.length == 0) {
+                document.getElementById('results').innerText = "Doesn't look there is any data for that location";
+                $("#severity-rating").css('color', `rgb(0, 255, 0)`);
+                $('#severity-rating').text('');
+                gauge.set(0);
+                return;
+            }
             document.getElementById('results').innerText = '';
             var table = document.getElementById("resultTable");
             for (let i = 0; i < response.length; i++) {
@@ -116,9 +122,21 @@ function getIncidents(coordinates, radius) {
             gauge.set(rating);
             opts.colorStop = `rgb(${rating * 25.5}, ${255 - rating * 25.5}, 0)`;
             gauge.setOptions(opts);
+            displayMap(coordinates);
         }
     };
 
     request.open("GET", traffic_url_template, true);
     request.send();
+}
+
+function displayMap(coordinates) {
+    console.log(coordinates);
+    let map_url_template = `https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasLight?mapArea=${coordinates}&mapSize=${window.innerWidth},${window.innerHeight}&mapLayer=TrafficFlow&key=${BING_API_KEY}`;
+
+    fetch(map_url_template).then(res => {return res.blob()}).then(blob => {
+        let img = URL.createObjectURL(blob);
+        let back = document.getElementById('background');
+        back.style.backgroundImage = `url(${img})`;
+    })
 }
