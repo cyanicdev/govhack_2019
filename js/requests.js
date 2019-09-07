@@ -62,7 +62,7 @@ function getCoordinatesFromLocation(location, radius = 5) {
 
 function getIncidents(coordinates, radius) {
     radius *= 111;
-    let traffic_url_template = `http://dev.virtualearth.net/REST/v1/Traffic/Incidents/${coordinates[0]},${coordinates[1]},${coordinates[2]},${coordinates[3]}?key=${BING_API_KEY}`;
+    let traffic_url_template = `https://dev.virtualearth.net/REST/v1/Traffic/Incidents/${coordinates[0]},${coordinates[1]},${coordinates[2]},${coordinates[3]}?key=${BING_API_KEY}`;
 
     let request = new XMLHttpRequest();
 
