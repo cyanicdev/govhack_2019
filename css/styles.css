@@ -1,7 +1,3 @@
-body {
-    background-color: #fff;
-}
-
 main {
     min-height: 100vh;
 }
@@ -20,7 +16,42 @@ tt {
 }
 
 #logo {
-    height: 30px;
+    height: 35px;
     width: auto;
     padding-right: 50px;
+}
+
+#results {
+    width: 33vw;
+}
+
+.col1 {
+    height: 100vh;
+    float: left;
+    width: 44.44%;
+}
+
+.col2 {
+    height: 100vh;
+    float: left;
+    width: 27.78%;
+}
+
+.col3 {
+    height: 100vh;
+    float: left;
+    width: 27.78%;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+td, th {
+    padding: 8px;
+    text-align: left;
+}
+
+#results {
+    font-family: sans-serif;
 }

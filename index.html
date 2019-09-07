@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>traffic tool - now in alpha!</title>
+    <title>Traffic Tool Alpha</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/jquery.min.js"></script>
@@ -18,7 +18,8 @@
                     <div class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group" style="width: 90vw;">
                             <img id="logo" src="res/tt_logo.png">
-                            <input style="max-width: 3 0%" id="location" class="bg-light form-control border-0 small" type="text" placeholder="Where do you want to go?">
+                            <input id="location" class="bg-light form-control border-0 small" type="text" placeholder="Where are you?">
+                            <input style="text-align: right; padding-right: 10px;" id="radius" class="bg-light form-control border-0 small" type="number" onkeydown="return event.keyCode !== 69" placeholder="How many kilometres?">
                             <div class="input-group-append">
                                 <button class="btn btn-primary py-0" type="button" onclick="search()"><i class="fas fa-search"></i></button>
                                 <button class="btn btn-primary py-0" type="button" onclick="getCurrentLocation()"><i class="fas fa-map-marker-alt"></i></button>
@@ -28,18 +29,35 @@
                 </div>
             </nav>
         <section>
-            <b id="severty-rating"></b>
-            <pre id="results"></pre>
+            <div class="col1">
+                <h3>Traffic in Your Area</h3>
+                <table id="resultTable">
+                    <tr>
+                        <th>Road and Hazard</th>
+                        <th>Severity</th>
+                        <th>Road Closed</th>
+                    </tr>
+                </table>
+                <p id="results"></p>
+            </div>
+            <div class="col2" >
+                <h3>Severity Rating</h3>
+                <h1 id="severity-rating">hello</h1>
+            </div>
+            <div class="col3">
+                <h3>On your L Plate?</h3>
+            </div>
         </section>
     </main>
 
-    <script src="js/requests.js"></script>
     <script src="js/traffic.js"></script>
+    <script src="js/requests.js"></script>
     <script src="js/index.js"></script>
-
+<!--
     <footer>
         <div>made by <tt>dotjam</tt>for govhack 2019</div>
     </footer>
 </body>
+-->
 
 </html>

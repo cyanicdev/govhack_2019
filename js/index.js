@@ -1,8 +1,29 @@
 function search() {
-    document.getElementById('results').innerText = 'loading ...';
-    let city = $("#location").val();
-    getCoordinatesFromLocation(city);
+    // Clear table
+    var table = document.getElementById('resultTable');
+    clearTable(table);
+
+    document.getElementById('results').innerHTML = 'loading ...';
+    let location = $("#location").val();
+    if(location.toLowerCase() == "moscow") {
+        window.location.href = 'https://www.youtube.com/watch?v=hxyhulJYz5I';
+    }
+    let radius = $("#radius").val();
+    if(radius) {
+        getCoordinatesFromLocation(location, radius);
+    }
+    else {
+        getCoordinatesFromLocation(location);
+    }
 }
+
+function clearTable(table) {
+    var rows = table.rows;
+    var i = rows.length;
+    while (--i) {
+      rows[i].parentNode.removeChild(rows[i]);
+    }
+  }
 
 $(document).keypress(function(e) {
     if (e.which == 13) { search(); }
