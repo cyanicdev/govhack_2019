@@ -1,3 +1,26 @@
 body {
     background-color: #fff;
 }
+
+main {
+    min-height: 100vh;
+}
+
+footer {
+    padding: 20px 50px;
+}
+
+section {
+    margin: 30px;
+}
+
+tt {
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+#logo {
+    height: 30px;
+    width: auto;
+    padding-right: 50px;
+}

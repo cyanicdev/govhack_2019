@@ -4,38 +4,39 @@
 <head>
     <meta charset="utf-8">
     <title>Radio Glenunga - Home</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/e15575d67d.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-            <div class="container-fluid">
-                <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Where do you want to go?">
-                        <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                    </div>
-                </form>
-                <ul class="nav navbar-nav flex-nowrap ml-auto">
-                    <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-search"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto navbar-search w-100">
-                                <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                    <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                </div>
-                            </form>
+    <main>
+        <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <div class="container-fluid">
+                    <div class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group" style="width: 90vw;">
+                            <img id="logo" src="res/tt_logo.png">
+                            <input style="max-width: 30%" id="location" class="bg-light form-control border-0 small" type="text" placeholder="Where do you want to go?">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary py-0" type="button" onclick="search()"><i class="fas fa-search"></i></button>
+                                <button class="btn btn-primary py-0" type="button"><i class="fas fa-map-marker-alt"></i></button>
+                            </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    <pre id="results"></pre>
+                    </div>
+                </div>
+            </nav>
+        <section>
+            <pre id="results"></pre>
+        </section>
+    </main>
 
-    <script src="js/jquery.min.js"></script>
     <script src="js/traffic.js"></script>
+    <script src="js/index.js"></script>
+
     <footer>
-        <p>© 2019 Radio Glenunga</p>
+        <div>made by <tt>dotjam</tt>for govhack 2019</div>
     </footer>
 </body>
 
