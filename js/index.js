@@ -17,6 +17,16 @@ function search() {
     }
 }
 
+function checkDist() {
+    thing = document.getElementById('radius');
+    if (thing.value.length > 3) {
+        thing.value = thing.value.slice(0,3); 
+    }
+    else if (thing.value < 1) {
+        thing.value = ''; 
+    }
+}
+
 function clearTable(table) {
     var rows = table.rows;
     var i = rows.length;
@@ -32,6 +42,8 @@ $(document).keypress(function(e) {
 function getCurrentLocation() {
     document.getElementById('results').innerText = 'loading ...';
     if (navigator.geolocation) {
+        var table = document.getElementById('resultTable');
+        clearTable(table);
         navigator.geolocation.getCurrentPosition(sendPosition);
     } else {
         alert('geolocation has failed');
@@ -39,10 +51,6 @@ function getCurrentLocation() {
     function sendPosition(position) {
         getCoordinatesFromLocation([position.coords.latitude, position.coords.longitude]);
     }
-}
-
-function generateGauge() {
-
 }
 
 let target = document.getElementById('severity-gauge'); // your canvas element

@@ -116,7 +116,6 @@ function getIncidents(coordinates, radius) {
             gauge.set(rating);
             opts.colorStop = `rgb(${rating * 25.5}, ${255 - rating * 25.5}, 0)`;
             gauge.setOptions(opts);
-            //document.getElementById('results').innerText = JSON.stringify(JSON.parse(request.responseText).resourceSets[0].resources, null, 4);
         }
     };
 
