@@ -6,6 +6,7 @@
     <title>Traffic Tool Alpha</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/e15575d67d.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -29,22 +30,24 @@
                 </div>
             </nav>
         <section>
-            <div class="col1">
+            <div class="top">
+                <h3>Severity Rating</h3>
+                <h1 id="severity-rating"></h1>
+                <canvas id="severity-gauge"></canvas>
+            </div>
+
+            <div class="col col1">
                 <h3>Traffic in Your Area</h3>
                 <table id="resultTable">
                     <tr>
                         <th>Road and Hazard</th>
-                        <th>Severity</th>
-                        <th>Road Closed</th>
+                        <th id="tblCol1">Severity</th>
+                        <th id="tblCol2">Road Closed</th>
                     </tr>
                 </table>
                 <p id="results"></p>
             </div>
-            <div class="col2" >
-                <h3>Severity Rating</h3>
-                <h1 id="severity-rating">hello</h1>
-            </div>
-            <div class="col3">
+            <div class="col col2">
                 <h3>On your L Plate?</h3>
             </div>
         </section>

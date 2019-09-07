@@ -1,6 +1,26 @@
 const BING_API_KEY = 'AinDEB4J8D17T6kvzhjjSDNNuTmhobGmLwTJq2vOEHdCfB2tqJzFbqP15w2PgNWI';
 const OPENCAGE_API_KEY = 'f6b2bd6db4644a57988456915902517b';
 
+let gauge;
+
+let opts = {
+    angle: 0, // The span of the gauge arc
+    lineWidth: 0.3, // The line thickness
+    radiusScale: 1, // Relative radius
+    pointer: {
+      length: 0.6, // // Relative to gauge radius
+      strokeWidth: 0.062, // The thickness
+      color: '#000000' // Fill color
+    },
+    limitMax: false,     // If false, max value increases automatically if value > maxValue
+    limitMin: false,     // If true, the min value of the gauge will be fixed
+    colorStart: 'rgb(0,255,0)',   // Colors
+    colorStop: 'rgb(255,0,0)',    // just experiment with them
+    strokeColor: '#E0E0E0',  // to see which ones work best for you
+    generateGradient: true,
+    highDpiSupport: true,     // High resolution support 
+};
+
 function getCoordinatesFromLocation(location, radius = 5) {
     if(typeof location == 'string')
     {
@@ -17,7 +37,7 @@ function getCoordinatesFromLocation(location, radius = 5) {
                     console.log("location: " + centre);
                     radius /= 111;
                     result = [ centre[0] - radius, centre[1] - radius, centre[0] + radius, centre[1] + radius ];
-                    getData(result, radius);                  
+                    getIncidents(result, radius);                  
                 } catch(err) {
                     document.getElementById('results').innerText = "Doesn't look there is any data for that location";
                 }
@@ -35,12 +55,12 @@ function getCoordinatesFromLocation(location, radius = 5) {
         console.log("location: " + location);
         radius /= 111;
         result = [ location[0] - radius, location[1] - radius, location[0] + radius, location[1] + radius ]
-        getData(result, radius);
+        getIncidents(result, radius);
     }
 }
 
 
-function getData(coordinates, radius) {
+function getIncidents(coordinates, radius) {
     radius *= 111;
     let traffic_url_template = `http://dev.virtualearth.net/REST/v1/Traffic/Incidents/${coordinates[0]},${coordinates[1]},${coordinates[2]},${coordinates[3]}?key=${BING_API_KEY}`;
 
@@ -61,8 +81,25 @@ function getData(coordinates, radius) {
                 let severity = row.insertCell(1);
                 let roadClosed = row.insertCell(2);
 
+                severity.style.textAlign = "center";
+                roadClosed.style.textAlign = "center";
+
                 hazard.innerText = element.description;
-                severity.innerText = element.severity;
+                switch(element.severity)
+                {
+                    case 1:
+                        severity.innerText = 'Low Impact';
+                        break;
+                    case 2:
+                        severity.innerText = 'Minor';
+                        break;
+                    case 3:
+                        severity.innerText = 'Moderate';
+                        break;
+                    case 4:
+                        severity.innerText = "Serious";
+                        break;
+                }
 
                 if (element.roadClosed == true){
                     roadClosed.innerHTML = `<i style="color: green;" class="fas fa-check"></i>`;
@@ -76,6 +113,9 @@ function getData(coordinates, radius) {
             console.log(rating);
             $("#severity-rating").css('color', `rgb(${rating * 25.5}, ${255 - rating * 25.5}, 0)`);
             $('#severity-rating').text(rating);
+            gauge.set(rating);
+            opts.colorStop = `rgb(${rating * 25.5}, ${255 - rating * 25.5}, 0)`;
+            gauge.setOptions(opts);
             //document.getElementById('results').innerText = JSON.stringify(JSON.parse(request.responseText).resourceSets[0].resources, null, 4);
         }
     };
