@@ -11,7 +11,7 @@ body::-webkit-scrollbar {
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    opacity: 0.5;
+    opacity: 0.2;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -62,7 +62,11 @@ tt {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #eeeeee;
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff;
 }
 
 td, th {

@@ -49,9 +49,9 @@ function getCurrentLocation() {
     }
 }
 
-let target = document.getElementById('severity-gauge'); // your canvas element
-gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-gauge.maxValue = 10; // set max gauge value
-gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-gauge.animationSpeed = 32; // set animation speed (32 is default value)
-gauge.set(0); // set actual value
+let target = document.getElementById('severity-gauge');
+gauge = new Gauge(target).setOptions(opts);
+gauge.maxValue = 10;
+gauge.setMinValue(0);
+gauge.animationSpeed = 16;
+gauge.set(0);

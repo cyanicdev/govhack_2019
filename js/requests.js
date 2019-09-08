@@ -139,4 +139,44 @@ function displayMap(coordinates) {
         let back = document.getElementById('background');
         back.style.backgroundImage = `url(${img})`;
     })
+    displayRoutesInArea(coordinates);
+}
+
+function displayRoutesInArea(coordinates) {    
+    let result = JSON.parse('url(res/shapes.json)');
+    let shapes = [];
+
+    for(let i = 0; i < result.length; i++) {
+        if(result[i].shape_pt_lat <= coordinates[0] && result[i].shape_pt_lat >= coordinates[2] && result[i].shape_pt_lng <= coordinates[1] && result[i].shape_pt_lng >= coordinates[3]) {
+            shapes.push(result[i]);
+        }
+    }
+
+    for(let i = 0; i < 3; i++) {
+        let curShape = shapes[i];
+        shapes.splice(i);
+        let route = [];
+        route.push(curShape);
+        let correct = [];
+        for(let j = 0; j < shapes.length; j++) {
+            if(shapes[j].shape_id == curShape.shape_id) {
+                route.push(shapes[j]);
+                correct.push(j);
+            }
+        }
+        for(let j = 0; j < correct.length; j++) {
+            shapes.splice(correct[j]);
+        }
+    }
+
+    console.log(shapes);
+
+    let route_url_template = `https://dev.virtualearth.net/REST/v1/Imagery/Map/Road/Routes?wp.0=${coordinates[0]};64;1&wp.1=${coordinates[1]};66;2&key=${BING_API_KEY}`;
+
+    fetch(route_url_template).then(res => {return res.blob()}).then(blob => {
+        let img = URL.createObjectURL(blob);
+        let image = document.createElement('img');
+        image.src = img;
+        document.body.appendChild(image);
+    })
 }

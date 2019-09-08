@@ -10,6 +10,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/e15575d67d.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
 </head>
 
 <body>
@@ -49,7 +51,12 @@
                 <p id="results"></p>
             </div>
             <div class="col col2">
-                <h3>On your L Plate?</h3>
+                <h3>Find a Route</h3>
+                <div class="mapImages" id="maps">
+                    <div>your content</div>
+                    <div>your content</div>
+                    <div>your content</div>
+                  </div>
             </div>
         </section>
     </main>
@@ -57,7 +64,18 @@
     <script src="js/traffic.js"></script>
     <script src="js/requests.js"></script>
     <script src="js/index.js"></script>
-<!--
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+    <!--
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('.mapImages').slick({
+            setting-name: setting-value
+          });
+        });
+    </script>-->
+    <!--
     <footer>
         <div>made by <tt>dotjam</tt>for govhack 2019</div>
     </footer>
